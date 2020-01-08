@@ -3,17 +3,17 @@ import {
   View,
   Text,
   ActivityIndicator,
-  Modal,
   TouchableOpacity,
   FlatList
 } from 'react-native';
 import { CurrencyStatsModal } from './CurrencyStatsModal';
+import {isObjectEmpty} from '../utils/isObjectEmpty';
 
 export const DisplayCurrencies = ({
   isLoading,
   data,
-  showModal,
-  setSelectedProduct
+  setSelectedProduct,
+  selectedProduct
 }) => {
   if (isLoading) {
     return (
@@ -28,24 +28,34 @@ export const DisplayCurrencies = ({
     )
   }
   return (
-    <>
+    <View>
       <FlatList
         testID="DisplayCurrencies"
         data={data}
         renderItem={({ item }) => 
           <TouchableOpacity
+            style={{ margin: 5, padding: 5, borderRadius: 20, borderColor: 'black', borderWidth: 1}}
             testID={item.id}
             key={item.id}
             onPress={() => setSelectedProduct(item)}
           >
-            <Text>
-              {item.display_name}
-            </Text>
+           {
+            Object.keys(item).map((key, index) =>
+              <Text testID={item.id + index} key={`${key}: ${item[key] || '-'}`}>
+                {`${key}: ${item[key] || '-'}`}
+              </Text>
+            )}
           </TouchableOpacity>
         }
         keyExtractor={item => item.id}
       />
-      <CurrencyStatsModal showModal={showModal} />
-    </>
+      {!isObjectEmpty(selectedProduct) &&
+        <CurrencyStatsModal
+          displayName={selectedProduct.display_name}
+          showModal={!isObjectEmpty(selectedProduct)}
+          selectedProduct={selectedProduct}
+          setSelectedProduct={setSelectedProduct}
+        />}
+    </View>
   );
 }
