@@ -5,10 +5,11 @@ import {
 import {DisplayCurrencies} from './src/components/DisplayCurrencies';
 import useDataFetching from './src/customHooks/useDataFetching';
 import {API_URL} from './src/constants/api';
+import {isObjectEmpty} from './src/utils/isObjectEmpty';
 
 const App = () => {
   const { data, isLoading, errorMessage } = useDataFetching(`${API_URL}/products`);
-  const [showModal, toggleModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState({});
   return (
     <>
       <SafeAreaView testID="App" style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -16,8 +17,8 @@ const App = () => {
           errorMessage={errorMessage}
           data={data}
           isLoading={isLoading}
-          showModal={showModal}
-          toggleModal={toggleModal}
+          showModal={!isObjectEmpty(selectedProduct)}
+          setSelectedProduct={setSelectedProduct}
         />
       </SafeAreaView>
     </>

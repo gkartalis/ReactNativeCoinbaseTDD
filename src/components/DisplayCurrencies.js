@@ -7,12 +7,13 @@ import {
   TouchableOpacity,
   FlatList
 } from 'react-native';
+import { CurrencyStatsModal } from './CurrencyStatsModal';
 
 export const DisplayCurrencies = ({
   isLoading,
   data,
   showModal,
-  toggleModal
+  setSelectedProduct
 }) => {
   if (isLoading) {
     return (
@@ -35,7 +36,7 @@ export const DisplayCurrencies = ({
           <TouchableOpacity
             testID={item.id}
             key={item.id}
-            onPress={() => toggleModal(true)}
+            onPress={() => setSelectedProduct(item)}
           >
             <Text>
               {item.display_name}
@@ -44,11 +45,7 @@ export const DisplayCurrencies = ({
         }
         keyExtractor={item => item.id}
       />
-      <Modal
-        testID="modal"
-        animationType="slide"
-        visible={showModal}
-      />
+      <CurrencyStatsModal showModal={showModal} />
     </>
   );
 }

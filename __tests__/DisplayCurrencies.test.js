@@ -52,7 +52,7 @@ describe('<DisplayCurrencies />', () => {
     const props = {
       isLoading: false,
       data: allCurrenciesResults,
-      toggleModal: () => jest.fn(),
+      setSelectedProduct: () => jest.fn(),
       showModal: false
     }
     const {getByTestId} = render(<DisplayCurrencies {...props} />);
