@@ -40,7 +40,7 @@ describe('<DisplayCurrencies />', () => {
       isLoading: false,
       data: allCurrenciesResults
     }
-    const {getByTestId, getByText} = render(<DisplayCurrencies {...props} />);
+    const {getByText} = render(<DisplayCurrencies {...props} />);
 
     allCurrenciesResults.forEach(element => {
       const currency = getByText(element.display_name);
