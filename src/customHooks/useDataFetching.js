@@ -17,7 +17,7 @@ const useDataFetching = endpoint => {
       setData(data);
       setIsLoading(false);
     } catch (err) {
-      setErrorMessage(err.error.message);
+      setErrorMessage(err.message);
       setIsLoading(false);
     }
   };
