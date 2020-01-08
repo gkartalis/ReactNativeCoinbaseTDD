@@ -28,21 +28,22 @@ export const DisplayCurrencies = ({
   }
   return (
     <>
-      <View testID="DisplayCurrencies">
-        {data.map((currency) => {
-          return(
-            <TouchableOpacity
-              key={currency.id}
-              testID={currency.id}
-              onPress={() => toggleModal(true)}
-            >
-              <Text>
-                {currency.display_name}
-              </Text>
-            </TouchableOpacity>
-          )
-        })}
-      </View>
+      <FlatList
+        testID="DisplayCurrencies"
+        data={data}
+        renderItem={({ item }) => 
+          <TouchableOpacity
+            testID={item.id}
+            key={item.id}
+            onPress={() => toggleModal(true)}
+          >
+            <Text>
+              {item.display_name}
+            </Text>
+          </TouchableOpacity>
+        }
+        keyExtractor={item => item.id}
+      />
       <Modal
         testID="modal"
         animationType="slide"
