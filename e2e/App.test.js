@@ -15,7 +15,7 @@ describe('<App />', () => {
     await expect(element(by.id('CurrencyDetailsModal'))).toBeNotVisible();
   });
 
-  it.only('should let user scroll through the list', async () => {
+  it('should let user scroll through the list', async () => {
     await element(by.id('DisplayCurrencies')).swipe("up", "slow", 0.6);
     await element(by.id('DisplayCurrencies')).swipe("down", "slow", 0.6);
   });
